@@ -14,15 +14,6 @@ public class Episodio {
     private Long id;
     private Integer temporada;
     private String titulo;
-
-    public Serie getSerie() {
-        return serie;
-    }
-
-    public void setSerie(Serie serie) {
-        this.serie = serie;
-    }
-
     private Integer numeroEpisodio;
     private Double avaliacao;
     private LocalDate dataLancamento;
@@ -31,22 +22,38 @@ public class Episodio {
 
     public Episodio(){}
 
-    public Episodio(Integer numeroTemporada, DadosEpisodio dadosEpisodios) {
+    public Episodio(Integer numeroTemporada, DadosEpisodio dadosEpisodio) {
         this.temporada = numeroTemporada;
-        this.titulo = dadosEpisodios.titulo();
-        this.numeroEpisodio = dadosEpisodios.numero();
+        this.titulo = dadosEpisodio.titulo();
+        this.numeroEpisodio = dadosEpisodio.numero();
+
         try {
-            this.avaliacao = Double.valueOf(dadosEpisodios.avaliacao());
-        }catch (NumberFormatException e){
+            this.avaliacao = Double.valueOf(dadosEpisodio.avaliacao());
+        } catch (NumberFormatException ex) {
             this.avaliacao = 0.0;
         }
 
         try {
-            this.dataLancamento = LocalDate.parse(dadosEpisodios.dataLancamento());
-        }catch (DateTimeParseException e){
+            this.dataLancamento = LocalDate.parse(dadosEpisodio.dataLancamento());
+        } catch (DateTimeParseException ex) {
             this.dataLancamento = null;
         }
+    }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Serie getSerie() {
+        return serie;
+    }
+
+    public void setSerie(Serie serie) {
+        this.serie = serie;
     }
 
     public Integer getTemporada() {
@@ -95,6 +102,6 @@ public class Episodio {
                 ", titulo='" + titulo + '\'' +
                 ", numeroEpisodio=" + numeroEpisodio +
                 ", avaliacao=" + avaliacao +
-                ", dataLancamento=" + dataLancamento;
+                ", dataLancamento=" + dataLancamento ;
     }
 }
